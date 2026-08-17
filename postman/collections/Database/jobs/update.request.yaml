@@ -1,6 +1,6 @@
 $kind: http-request
 name: update
-url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/jobs/{{TEST_JOB_PUBLIC_UUID_ACME}}"
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/jobs/{{TEST_JOB_PUBLIC_UUID_BCC}}"
 method: PUT
 body:
   type: json

@@ -1,5 +1,5 @@
 $kind: http-request
 name: delete
-url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/api-keys/{{TEST_API_KEY_UUID_ACME}}"
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/api-keys/{{TEST_API_KEY_UUID_BCC}}"
 method: DELETE
 order: 4165305515405453

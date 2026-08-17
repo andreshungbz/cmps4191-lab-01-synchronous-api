@@ -6,7 +6,7 @@ body:
   type: json
   content: |-
     {
-        "consumer_id": "{{TEST_CONSUMER_UUID_ACME}}",
+        "consumer_id": "{{TEST_CONSUMER_UUID_BCC}}",
         "job_type": "process_video",
         "payload": {
             "video_id": "vid_998877",
