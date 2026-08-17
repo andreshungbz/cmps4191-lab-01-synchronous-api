@@ -4,34 +4,48 @@ BEGIN;
 -- CONSUMERS
 -- ====================================================================================
 INSERT INTO
-    consumers (id, name, email, status)
+    consumers (
+        id,
+        name,
+        email,
+        status,
+        version,
+        created_at,
+        updated_at
+    )
 VALUES
     (
-        '018f3a00-0000-7000-8000-000000000001',
-        'Acme Corp',
-        'api@acme.com',
-        'active'
+        '0198f000-0000-7000-8000-000000000001',
+        'Belize City Council',
+        'api@belizecity.example',
+        'active',
+        1,
+        now() - interval '90 days',
+        now() - interval '2 days'
     ),
     (
-        '018f3a00-0000-7000-8000-000000000002',
-        'Starlight Logistics',
-        'devs@starlight.io',
-        'active'
+        '0198f000-0000-7000-8000-000000000002',
+        'National Meteorological Service',
+        'api@hydromet.example',
+        'active',
+        1,
+        now() - interval '60 days',
+        now() - interval '1 day'
     ),
     (
-        '018f3a00-0000-7000-8000-000000000003',
-        'Legacy Systems Inc',
-        'admin@legacysys.com',
-        'suspended'
+        '0198f000-0000-7000-8000-000000000003',
+        'Legacy Test Consumer',
+        'legacy@example.test',
+        'suspended',
+        1,
+        now() - interval '120 days',
+        now() - interval '30 days'
     );
 
 -- ====================================================================================
 -- API KEYS
--- Raw keys for development testing:
--- 1. gk_live_a1b2c3d4e5f6g7h8i9j0
--- 2. gk_test_x9y8z7w6v5u4t3s2r1q0
--- 3. gk_live_m1n2o3p4q5r6s7t8u9v0
 -- ====================================================================================
+-- These are deliberately non-secret demonstration hashes, not usable API keys.
 INSERT INTO
     api_keys (
         id,
@@ -40,44 +54,49 @@ INSERT INTO
         key_prefix,
         status,
         last_used_at,
-        expires_at
+        expires_at,
+        created_at
     )
 VALUES
     (
-        '018f3a00-0000-7000-8000-000000000101',
-        '018f3a00-0000-7000-8000-000000000001',
-        encode(
-            digest ('gk_a1b2c3d4e5f6g7h8i9j0', 'sha256'),
-            'hex'
-        ),
-        'gk_a1b2',
+        '0198f000-0000-7000-8000-000000000101',
+        '0198f000-0000-7000-8000-000000000001',
+        'sample_hash_city_active',
+        'gk_city_',
         'active',
-        NOW() - INTERVAL '10 minutes',
-        NOW() + INTERVAL '1 year'
+        now() - interval '2 hours',
+        now() + interval '180 days',
+        now() - interval '90 days'
     ),
     (
-        '018f3a00-0000-7000-8000-000000000102',
-        '018f3a00-0000-7000-8000-000000000001',
-        encode(
-            digest ('gk_x9y8z7w6v5u4t3s2r1q0', 'sha256'),
-            'hex'
-        ),
-        'gk_x9y8',
-        'active',
-        NULL,
-        NOW() + INTERVAL '30 days'
+        '0198f000-0000-7000-8000-000000000102',
+        '0198f000-0000-7000-8000-000000000001',
+        'sample_hash_city_revoked',
+        'gk_old_',
+        'revoked',
+        now() - interval '45 days',
+        now() - interval '30 days',
+        now() - interval '120 days'
     ),
     (
-        '018f3a00-0000-7000-8000-000000000103',
-        '018f3a00-0000-7000-8000-000000000002',
-        encode(
-            digest ('gk_m1n2o3p4q5r6s7t8u9v0', 'sha256'),
-            'hex'
-        ),
-        'gk_m1n2',
+        '0198f000-0000-7000-8000-000000000103',
+        '0198f000-0000-7000-8000-000000000002',
+        'sample_hash_met_active',
+        'gk_met__',
         'active',
-        NOW() - INTERVAL '1 hour',
-        NULL
+        now() - interval '15 minutes',
+        now() + interval '180 days',
+        now() - interval '60 days'
+    ),
+    (
+        '0198f000-0000-7000-8000-000000000104',
+        '0198f000-0000-7000-8000-000000000003',
+        'sample_hash_legacy_revoked',
+        'gk_leg__',
+        'revoked',
+        now() - interval '35 days',
+        now() - interval '5 days',
+        now() - interval '120 days'
     );
 
 -- ====================================================================================
@@ -94,44 +113,61 @@ INSERT INTO
         result,
         error_message,
         started_at,
-        completed_at
+        completed_at,
+        created_at
     )
 VALUES
     (
-        '018f3a00-0000-7000-8000-000000000201',
-        'a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11',
-        '018f3a00-0000-7000-8000-000000000001',
-        'export_csv',
+        '0198f000-0000-7000-8000-000000000201',
+        '1198f000-0000-4000-8000-000000000201',
+        '0198f000-0000-7000-8000-000000000001',
+        'data_export',
         'completed',
-        '{"entity": "orders", "date_range": "2026-Q1"}',
-        '{"download_url": "https://storage.example.com/exports/orders_q1.csv", "row_count": 1420}',
+        '{"format":"csv"}',
+        '{"rows":1250}',
         NULL,
-        NOW() - INTERVAL '2 hours',
-        NOW() - INTERVAL '1 hour 58 minutes'
+        now() - interval '3 days 2 minutes',
+        now() - interval '3 days',
+        now() - interval '3 days 3 minutes'
     ),
     (
-        '018f3a00-0000-7000-8000-000000000202',
-        'b1eebc99-9c0b-4ef8-bb6d-6bb9bd380a22',
-        '018f3a00-0000-7000-8000-000000000001',
-        'send_webhook',
-        'queued',
-        '{"event": "invoice.payment_succeeded", "target_url": "https://acme.com/webhooks"}',
-        NULL,
-        NULL,
-        NULL,
-        NULL
-    ),
-    (
-        '018f3a00-0000-7000-8000-000000000203',
-        'c2eebc99-9c0b-4ef8-bb6d-6bb9bd380a33',
-        '018f3a00-0000-7000-8000-000000000002',
-        'process_image',
+        '0198f000-0000-7000-8000-000000000202',
+        '1198f000-0000-4000-8000-000000000202',
+        '0198f000-0000-7000-8000-000000000001',
+        'data_export',
         'failed',
-        '{"image_id": "img_9876", "operations": ["resize", "compress"]}',
+        '{"format":"json"}',
         NULL,
-        'failed to fetch source image: HTTP 404 Not Found',
-        NOW() - INTERVAL '30 minutes',
-        NOW() - INTERVAL '29 minutes'
+        'source data unavailable',
+        now() - interval '1 day 1 minute',
+        now() - interval '1 day',
+        now() - interval '1 day 2 minutes'
+    ),
+    (
+        '0198f000-0000-7000-8000-000000000203',
+        '1198f000-0000-4000-8000-000000000203',
+        '0198f000-0000-7000-8000-000000000002',
+        'data_export',
+        'completed',
+        '{"format":"csv"}',
+        '{"rows":480}',
+        NULL,
+        now() - interval '8 hours 1 minute',
+        now() - interval '8 hours',
+        now() - interval '8 hours 2 minutes'
+    ),
+    (
+        '0198f000-0000-7000-8000-000000000204',
+        '1198f000-0000-4000-8000-000000000204',
+        '0198f000-0000-7000-8000-000000000002',
+        'data_export',
+        'processing',
+        '{"format":"csv"}',
+        NULL,
+        NULL,
+        now() - interval '1 minute',
+        NULL,
+        now() - interval '2 minutes'
     );
 
 COMMIT;
