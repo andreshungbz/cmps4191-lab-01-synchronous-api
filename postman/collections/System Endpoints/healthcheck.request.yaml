@@ -1,0 +1,4 @@
+$kind: http-request
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/healthcheck"
+method: GET
+order: 1786772889036

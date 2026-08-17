@@ -1,0 +1,17 @@
+$kind: http-request
+name: create
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/jobs"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "consumer_id": "{{TEST_CONSUMER_UUID_ACME}}",
+        "job_type": "process_video",
+        "payload": {
+            "video_id": "vid_998877",
+            "format": "mp4",
+            "resolution": "1080p"
+        }
+    }
+order: 1786807659726

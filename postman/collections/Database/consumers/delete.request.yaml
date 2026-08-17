@@ -1,0 +1,5 @@
+$kind: http-request
+name: delete
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/consumers/{{TEST_CONSUMER_UUID_ACME}}"
+method: DELETE
+order: 4435640722838974

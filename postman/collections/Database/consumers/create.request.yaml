@@ -1,0 +1,12 @@
+$kind: http-request
+name: create
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/consumers"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "name": "Example Corporation",
+        "email": "test@exmaple.com"
+    }
+order: 1786803080113

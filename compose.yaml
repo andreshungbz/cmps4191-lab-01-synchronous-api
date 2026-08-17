@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:18.4
+    container_name: cmps4191_lab_01_postgres
+    environment:
+      POSTGRES_USER: cmps4191_lab_01_user
+      POSTGRES_PASSWORD: cmps4191_lab_01_password
+      POSTGRES_DB: cmps4191_lab_01
+    healthcheck:
+      test:
+        ['CMD-SHELL', 'pg_isready -U cmps4191_lab_01_user -d cmps4191_lab_01']
+      interval: 1s
+      timeout: 5s
+      retries: 5
+    networks:
+      - cmps4191_lab_01_network
+
+  app:
+    build: .
+    container_name: cmps4191_cmps4191_lab_01
+    ports:
+      - '4000:4000'
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: cmps4191_lab_01_user
+      DB_PASSWORD: cmps4191_lab_01_password
+      DB_NAME: cmps4191_lab_01
+    networks:
+      - cmps4191_lab_01_network
+
+networks:
+  cmps4191_lab_01_network:
+    name: cmps4191_lab_01_network
+    driver: bridge

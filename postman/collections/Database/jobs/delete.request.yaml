@@ -1,0 +1,5 @@
+$kind: http-request
+name: delete
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/jobs/{{TEST_JOB_UUID_ACME}}"
+method: DELETE
+order: 4349799613157966

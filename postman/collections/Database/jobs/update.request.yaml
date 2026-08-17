@@ -1,0 +1,22 @@
+$kind: http-request
+name: update
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/jobs/{{TEST_JOB_PUBLIC_UUID_ACME}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+        "status": "completed",
+        "result": {
+            "http_status": 200,
+            "response_body": {
+                "received": true
+            },
+            "attempts": 1,
+            "latency_ms": 142
+        },
+        "error_message": null,
+        "started_at": "2026-08-15T10:50:00Z",
+        "completed_at": "2026-08-15T10:50:01Z"
+    }
+order: 4033255805439723

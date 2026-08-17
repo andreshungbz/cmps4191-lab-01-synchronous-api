@@ -1,0 +1,5 @@
+$kind: http-request
+name: read
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/consumers/{{TEST_CONSUMER_UUID_ACME}}"
+method: GET
+order: 3673066129233379

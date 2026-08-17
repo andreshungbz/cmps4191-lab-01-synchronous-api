@@ -1,0 +1,13 @@
+$kind: http-request
+name: update
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/consumers/{{TEST_CONSUMER_UUID_ACME}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+        "name": "Acme Corp",
+        "email": "development@acme.com",
+        "status": "terminated"
+    }
+order: 3920281426307055

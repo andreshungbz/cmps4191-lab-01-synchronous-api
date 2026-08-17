@@ -1,0 +1,11 @@
+$kind: http-request
+name: update
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/api-keys/{{TEST_API_KEY_UUID_ACME}}"
+method: PUT
+body:
+  type: json
+  content: |-
+    {
+        "status": "revoked"
+    }
+order: 4128348895158675

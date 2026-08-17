@@ -1,0 +1,19 @@
+# Local metadata files
+.DS_Store
+
+# Binaries
+bin/
+
+# Environment files
+.envrc
+
+# Devenv
+.devenv*
+devenv.local.nix
+devenv.local.yaml
+
+# direnv
+.direnv
+
+# pre-commit
+.pre-commit-config.yaml

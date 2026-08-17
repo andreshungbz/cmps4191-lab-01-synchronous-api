@@ -1,0 +1,5 @@
+$kind: http-request
+name: read
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/jobs/{{TEST_JOB_PUBLIC_UUID_ACME}}"
+method: GET
+order: 3829336902606922

@@ -1,0 +1,12 @@
+$kind: http-request
+name: create
+url: "{{SERVER_ADDRESS}}:{{SERVER_PORT}}/{{API_VERSION}}/api-keys"
+method: POST
+body:
+  type: json
+  content: |-
+    {
+        "consumer_id": "{{TEST_CONSUMER_UUID_ACME}}",
+        "expires_at": "2027-01-01T00:00:00Z"
+    }
+order: 1786805729949
