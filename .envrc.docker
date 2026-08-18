@@ -1,2 +1,2 @@
-export DB_DSN=postgres://cmps4191_lab_01_user:cmps4191_lab_01_password@postgres/cmps4191_lab_01?sslmode=disable
+export GATEKEEPER_DB_DSN=postgres://cmps4191_lab_01_user:cmps4191_lab_01_password@postgres/cmps4191_lab_01?sslmode=disable
 export PORT=4000

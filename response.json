@@ -1,0 +1,15 @@
+{
+	"report": {
+		"consumer_id": "0198f000-0000-7000-8000-000000000001",
+		"consumer_name": "Belize City Council",
+		"from": "2026-01-01T00:00:00Z",
+		"to": "2027-01-01T00:00:00Z",
+		"active_keys": 1,
+		"revoked_keys": 1,
+		"queued_jobs": 0,
+		"processing_jobs": 0,
+		"completed_jobs": 1,
+		"failed_jobs": 1,
+		"generated_at": "2026-08-17T23:53:19.578923032Z"
+	}
+}
