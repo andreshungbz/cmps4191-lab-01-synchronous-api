@@ -40,11 +40,12 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodPut, "/v1/jobs/:public_id", app.updateJobHandler)
 	router.HandlerFunc(http.MethodDelete, "/v1/jobs/:id", app.deleteJobHandler)
 
+	// consumer activity report routes
+	router.HandlerFunc(http.MethodPost, "/v1/reports", app.createReportHandler)
+
 	// GLOBAL MIDDLEWARE
 
 	return app.requestLogger(
-		app.gzip(
-			router, // last middleware
-		),
+		router, // last middleware
 	)
 }
