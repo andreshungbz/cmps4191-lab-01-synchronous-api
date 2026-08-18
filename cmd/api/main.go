@@ -21,11 +21,15 @@ var (
 
 // config stores the API server configuration.
 type config struct {
-	port    int    // API server port
-	env     string // (development|staging|production)
-	timeout int    // grace period in seconds for HTTP server shutdown
-	db      struct {
-		dsn string // data source name
+	port        int           // API server port
+	env         string        // (development|staging|production)
+	timeout     int           // grace period in seconds for HTTP server shutdown
+	reportDelay time.Duration // SYNCHRONOUS API TESTING: field for report generation delay
+	db          struct {
+		dsn          string        // data source name
+		maxOpenConns int           // maximum number of open connections to the database
+		maxIdleConns int           // maximum number of idle connections in the connection pool
+		maxIdleTime  time.Duration // maximum amount of time a connection may be idle
 	}
 }
 
@@ -51,6 +55,12 @@ func main() {
 
 	// database flags
 	flag.StringVar(&cfg.db.dsn, "db-dsn", "", "PostgreSQL DSN")
+	flag.IntVar(&cfg.db.maxOpenConns, "db-max-open-conns", 25, "PostgreSQL max open connections")
+	flag.IntVar(&cfg.db.maxIdleConns, "db-max-idle-conns", 25, "PostgreSQL max idle connections")
+	flag.DurationVar(&cfg.db.maxIdleTime, "db-max-idle-time", 15*time.Minute, "PostgreSQL max connection idle time")
+
+	// SYNCHRONOUS API TESTING: flag for report generation delay
+	flag.DurationVar(&cfg.reportDelay, "report-delay", 0, "Artificial report-generation delay")
 
 	// version flag
 	displayVersion := flag.Bool("version", false, "Display program version")
@@ -96,6 +106,10 @@ func openDB(cfg config) (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	db.SetMaxOpenConns(cfg.db.maxOpenConns)
+	db.SetMaxIdleConns(cfg.db.maxIdleConns)
+	db.SetConnMaxIdleTime(cfg.db.maxIdleTime)
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
