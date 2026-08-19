@@ -10,6 +10,7 @@ import (
 	"testing"
 )
 
+// TestWriteJSON verifies the writeJSON helper function correctly writes JSON responses.
 func TestWriteJSON(t *testing.T) {
 	// create application and response recorder
 	app := &application{}
@@ -44,6 +45,7 @@ func TestWriteJSON(t *testing.T) {
 	}
 }
 
+// TestReadJSON verifies the readJSON helper function correctly reads JSON from requests.
 func TestReadJSON(t *testing.T) {
 	// create application and response recorder
 	app := &application{}
